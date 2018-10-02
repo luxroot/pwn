@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 int cnt;
 
@@ -26,10 +27,11 @@ void intro(){
 }
 
 int prob(){
-    int a,b,ans,inp=0;
-    char op[4]={0,},buf[10];
-    a=rand()%500;
-    b=rand()%500;
+    int a,b,ans,inp=0xFFFFFFFF;
+    char op[4]={0,};
+AA:
+    a=rand()%45000;
+    b=rand()%45000;
     switch(rand()%4){
         case 0:
             strcat(op,"add");
@@ -41,15 +43,16 @@ int prob(){
             break;
         case 2:
             strcat(op,"div");
+            b=rand()%10+1;
             ans=a/b;
             break;
         case 3:
             strcat(op,"sub");
+            if(a-b==-1)goto AA;
             ans=a-b;
     }
     printf("prob >%s %d %d\nans :",op,a,b);
-    read(0,buf,10);
-    inp=atoi(buf);
+    scanf("%d", &inp);
     if(inp==ans){
         puts("Y34h!");
         return 1;
