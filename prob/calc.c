@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <signal.h>
 
 int cnt;
 
@@ -24,6 +25,12 @@ void intro(){
     puts("ex: prob ]mul 2 23");
     puts("    ans ]46");
     puts("if you solve 100 probs, I will give you flag!");
+    puts("*********** U only have 30 seconds *************");
+}
+
+void end_alarm(){
+    puts("Time up! U must be v3ry v3ry qu1ck");
+    exit(0);
 }
 
 int prob(){
@@ -62,6 +69,8 @@ AA:
 }
 
 int main(){
+    signal(SIGALRM, end_alarm);
+    alarm(30);
     intro();
     while(1){
         printf("\n\nYou solved %d problems\n",cnt);
