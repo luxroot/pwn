@@ -16,6 +16,7 @@ void greeting(){
     char buf[64];
     read(0,buf,84);
     printf("Hi %s!\n",buf);
+    no_flag();
     return;
 }
 
@@ -24,11 +25,7 @@ int main(){
     setvbuf(stdout,0,2,0);
     puts("Do you know where return address is??");
     puts("If you don't know about it, google it! (grin)");
-    if(0){
-        puts("This part is just a hint");
-        puts("I just want you to know there is a function named get_flag");
-        exit(0);
-    }
+    puts("Hint) there's a function named get_flag");
     greeting();
     exit(0);
     return 0;
